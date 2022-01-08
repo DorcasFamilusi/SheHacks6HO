@@ -1,0 +1,40 @@
+# Prompt user 1 for word and number of guesses
+word = input("Player 1, enter word for player 2 to guess: ").lower()
+guesses = int(input("Enter number of guesses for player 2: "))
+
+# Put word's individual letters in a list
+wordList = []
+for i in word:
+    wordList.append(i)
+
+# Make an all-underscore version of wordList
+underscoreList = []
+for i in word:
+    underscoreList.append("_")
+
+# Display letter slots and guesses left
+print("WORD: " + "".join(underscoreList), end="")
+print("\nGUESSES LEFT: " + str(guesses))
+
+# Prompt player 2 to guess letter
+while guesses != 0:
+    letter = input("Player 2, guess a letter: ").lower()
+    if letter not in word:
+        if letter.isalpha():
+            print("Incorrect. Letter is not in the word")
+            guesses -= 1
+        else:
+            print("Invalid input")
+    else:
+        print("Correct.")
+        for i in range(len(word)):
+            if wordList[i] == letter:
+                underscoreList[i] = wordList[i]
+
+    # Check if the word is fully guessed
+    if wordList == underscoreList:
+        break
+
+    # Reprompt the thing
+    print("WORD: " + "".join(underscoreList), end='')
+    print("\nGUESSES LEFT: " + str(guesses))
